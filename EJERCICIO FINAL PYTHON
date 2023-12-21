@@ -1,0 +1,57 @@
+###LUISMI
+
+# Realice el ejercicio dentro del cuadro a continuación de esta línea 
+#disccionario grande--> calve: nombre de la planta
+#el menu tiene que ser infinito es decir que se salga de forma voluntaria, no se limite a tener 1 o dos opciones y ya
+#con cierto formato que ponga un texto previo en plan en nombre de la planta es: x o poner bonito, que no sea soo el print de la clave
+#que los diccionarios sean bonitos
+#el 4 es con rango, el 6 buscar en lista
+
+BBDD = {
+    "Pino": {"tamaño (cm)": 300, "hábitat": "terrestre", "provincias": ["Madrid", "Barcelona", "Cuenca"]}, 
+    "Abeto": {"tamaño (cm)": 200, "hábitat": "terrestre", "provincias": ["Madrid", "Ávila", "Murcia"]},
+    "Cerezo": {"tamaño (cm)": 100, "hábitat": "terrestre", "provincias": ["Cádiz", "León", "Cuenca"]}
+}
+
+def nueva_planta():
+    nueva_planta = input("Introduce una nueva planta: ")
+    nuevo_tamaño = int(input("Introduce su tamaño: "))
+    nuevo_habitat = input("Introduce su habitat: ")
+    nuevas_provincias = input("Introduce sus provincias (separado por comas)").split(',')
+    BBDD[nueva_planta] = {'tamaño': nuevo_tamaño, "hábitat": nuevo_habitat, "provincias": nuevas_provincias}
+    print("Planta incluida")
+
+def listar_planta():
+    for planta in BBDD:
+        print(planta)
+        
+def mostrar_datos():
+    planta = input("Introduce el nombre de la planta:")
+    if planta in BBDD:
+        print(str(BBDD[planta]["tamaño (cm)"]) + " , " + BBDD[planta]["hábitat"] + " , " +  str(BBDD[planta]["provincias"]))
+
+def buscar_por_tamaño():
+    tamaño = int(input("Introduce un tamaño:"))
+    for especie, detalles in BBDD.items():
+        if 100 <= tamaño <= 180 and tamaño == detalles["tamaño (cm)"]:
+            print("Especie:", especie, "Detalles:", detalles)
+        else:
+            print("Ese tamaño no está en el diccionario")
+    #tamaño_max = int(input("Introduce un tamaño maximo:"))
+    #while True:
+        #if tamaño >= 100 and tamaño <=180:
+            #print(planta)
+    
+   # for clave, valor in BBDD.items:
+        #if cm["tamaño (cm)"] == tamaño:
+           # print(tamaño)
+
+
+def buscar_por_habitat():
+    habitat = input("Introduce el habitat")
+    for planta, info in BBDD.items():
+        if info["hábitat"] == habitat:
+            print(planta)
+
+
+buscar_por_habitat()
