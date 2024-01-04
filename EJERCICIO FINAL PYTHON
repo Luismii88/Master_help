@@ -55,3 +55,278 @@ def buscar_por_habitat():
 
 
 buscar_por_habitat()
+
+
+
+
+##20240103 luismi
+
+BBDD = {
+    "Pino": {"tamaño (cm)": 300, "hábitat": "terrestre", "provincias": ["Madrid", "Barcelona", "Cuenca"]}, 
+    "Abeto": {"tamaño (cm)": 200, "hábitat": "terrestre", "provincias": ["Madrid", "Ávila", "Murcia"]},
+    "Cerezo": {"tamaño (cm)": 100, "hábitat": "terrestre", "provincias": ["Cádiz", "León", "Cuenca"]}
+}
+
+def nueva_planta():
+    nueva_planta = input("Introduce una nueva planta: ")
+    nuevo_tamaño = int(input("Introduce su tamaño: "))
+    nuevo_habitat = input("Introduce su habitat: ")
+    nuevas_provincias = input("Introduce sus provincias (separado por comas)").split(',')
+    BBDD[nueva_planta] = {'tamaño': nuevo_tamaño, "hábitat": nuevo_habitat, "provincias": nuevas_provincias}
+    print("Planta incluida")
+
+def listar_planta():
+    for planta in BBDD:
+        print(planta)
+        
+def mostrar_datos():
+    planta = input("Introduce el nombre de la planta:")
+    if planta in BBDD:
+        print(str(BBDD[planta]["tamaño (cm)"]) + " , " + BBDD[planta]["hábitat"] + " , " +  str(BBDD[planta]["provincias"]))
+
+#def buscar_por_tamaño():
+#    tamaño = int(input("Introduce un tamaño:"))
+#    for especie, detalles in BBDD.items():
+#        if 100 <= tamaño <= 180 and tamaño == detalles["tamaño (cm)"]:
+#            print("Especie:", especie, "Detalles:", detalles)
+#        else:
+#            print("Ese tamaño no está en el diccionario")
+    #tamaño_max = int(input("Introduce un tamaño maximo:"))
+    #while True:
+        #if tamaño >= 100 and tamaño <=180:
+            #print(planta)
+    
+   # for clave, valor in BBDD.items:
+        #if cm["tamaño (cm)"] == tamaño:
+        #print(tamaño)
+
+
+def buscar_por_tamaño():
+    rango_min = int(input("Introduce el valor mínimo del rango:", ))
+    rango_max = int(input("Introduce el valor máximo del rango:", ))
+
+    plantas_encontradas = []
+
+    for planta, info in BBDD.items():
+        tamaño = info["tamaño (cm)"]
+        if rango_min <= tamaño <= rango_max:
+            plantas_encontradas.append(planta)
+
+    if plantas_encontradas:
+        print("Las plantas cuyo tamaño está en el rango comprendido entre ", rango_min, "y", rango_max,"cm son:", ', ' .join(plantas_encontradas))
+    else:
+        print("No se encontraron plantas en el rango comprendido entre ", rango_min, "y", rango_max,"cm.")
+
+# Ejecutar la función
+buscar_por_tamaño()
+
+
+
+def buscar_por_habitat():
+    habitat = input("Introduce el habitat:", )
+    for planta, info in BBDD.items():
+        if info["hábitat"] == habitat:
+            print(planta)
+
+#def buscar_por_provincia():
+#    provincia = input("Introduce la provincia:", )
+#    for planta, info in BBDD.items():
+#        if info["provincias"] == provincia:
+#            print("En", provincia ,"se pueden cultivar:", planta)
+#        else:
+#            print("Su provincia no se encuentra en la base de datos")
+
+def buscar_por_provincia():
+    provincia = input("Introduce la provincia: ")
+    arboles_encontrados = []
+    for planta, info in BBDD.items():
+        if provincia in info["provincias"]:
+            arboles_encontrados.append(planta)
+
+    if arboles_encontrados:
+        print("Los árboles que se encuentran en", provincia,  "son:", ', ' .join(arboles_encontrados))
+    else:
+        print("No se encontraron árboles para la provincia", provincia, ".")
+
+
+
+20240104
+#EJERCICIO 1
+# Realice el ejercicio dentro del cuadro a continuación de esta línea 
+#diccionario grande--> calve: nombre de la planta
+#el menu tiene que ser infinito es decir que se salga de forma voluntaria, no se limite a tener 1 o dos opciones y ya
+#con cierto formato que ponga un texto previo en plan en nombre de la planta es: x o poner bonito, que no sea solo el print de la clave
+#que los diccionarios sean bonitos
+#el 4 es con rango, el 6 buscar en lista
+
+
+BBDD = {
+    "Encina": {"tamaño (cm)": 1000, "hábitat": "Terrestre", "provincias": ["Madrid", "Barcelona", "Cuenca"]}, 
+    "Castaño": {"tamaño (cm)": 2000, "hábitat": "Terrestre", "provincias": ["Cáceres", "Vigo", "León"]},
+    "Olivo": {"tamaño (cm)": 500, "hábitat": "Terrestre", "provincias": ["Jaén", "Girona", "Badajóz"]},
+    "Pino": {"tamaño (cm)": 1500, "hábitat": "Terrestre", "provincias": ["Valencia", "León", "Jaén"]},
+    "Junco": {"tamaño (cm)": 300, "hábitat": "Acuático", "provincias": ["Madrid", "Palencia", "Cuenca"]},
+    "Lirio": {"tamaño (cm)": 150, "hábitat": "Acuático", "provincias": ["Vigo", "Asturias", "Bilbao"]},
+    "Nenúfar": {"tamaño (cm)": 100, "hábitat": "Acuático", "provincias": ["Ciudad Real", "Teruel", "Cuenca"]},
+    "Alcornoque": {"tamaño (cm)": 5000, "hábitat": "Terrestre", "provincias": ["Madrid", "Burgos", "Pontevedra"]},
+}
+
+def nueva_planta():
+    nueva_planta = input("Introduce una nueva planta: ", )
+    nuevo_tamaño = int(input("Introduce su tamaño: ", ))
+    nuevo_habitat = input("Introduce su habitat: ", )
+    nuevas_provincias = input("Introduce sus provincias (separado por comas)").split(',')
+    BBDD[nueva_planta] = {'tamaño': nuevo_tamaño, "hábitat": nuevo_habitat, "provincias": nuevas_provincias}
+    print("Planta incluida")
+
+#nueva_planta()
+
+def listar_planta():
+    for planta in BBDD:
+        print(planta)
+
+#listar_planta()
+ 
+       
+#def mostrar_datos():
+#    planta = input("Introduce el nombre de la planta:")
+#    if planta in BBDD:
+#        print("La planta", planta, "mide", str(BBDD[planta]["tamaño (cm)"]) + "cm , es de hábitat " + BBDD[planta]["hábitat"] + " y se encuentra en" +  str(BBDD[planta]["provincias"]))
+
+
+def mostrar_datos():
+    planta = input("Introduce el nombre de la planta:")
+    if planta in BBDD:
+        info_planta = BBDD[planta]
+        tamaño = info_planta["tamaño (cm)"]
+        hábitat = info_planta["hábitat"]
+        provincias = ", ".join(info_planta["provincias"])
+
+        print("La planta", planta, "mide", tamaño, "cm, es de hábitat", hábitat, "y se encuentra en las provincias:", provincias)
+    else:
+        print("No se encontró información para la planta", planta)
+
+#mostrar_datos()
+
+#def buscar_por_tamaño():
+#    tamaño = int(input("Introduce un tamaño:"))
+#    for especie, detalles in BBDD.items():
+#        if 100 <= tamaño <= 180 and tamaño == detalles["tamaño (cm)"]:
+#            print("Especie:", especie, "Detalles:", detalles)
+#        else:
+#            print("Ese tamaño no está en el diccionario")
+
+    #tamaño_max = int(input("Introduce un tamaño maximo:"))
+    #while True:
+        #if tamaño >= 100 and tamaño <=180:
+            #print(planta)
+    
+   # for clave, valor in BBDD.items:
+        #if cm["tamaño (cm)"] == tamaño:
+           # print(tamaño)
+def buscar_por_tamaño():
+    rango_min = int(input("Introduce el valor mínimo del rango:", ))
+    rango_max = int(input("Introduce el valor máximo del rango:", ))
+
+    plantas_encontradas = []
+
+    for planta, info in BBDD.items():
+        tamaño = info["tamaño (cm)"]
+        if rango_min <= tamaño <= rango_max:
+            plantas_encontradas.append(planta)
+
+    if plantas_encontradas:
+        print("Las plantas cuyo tamaño está en el rango comprendido entre", rango_min, "y", rango_max,"cm son:", ', ' .join(plantas_encontradas))
+    else:
+        print("No se encontraron plantas en el rango comprendido entre", rango_min, "y", rango_max,"cm.")
+
+# Ejecutar la función
+#buscar_por_tamaño()
+
+
+
+def buscar_por_habitat():
+    habitat = input("Introduce el habitat:", )
+    plantas_habitat = []
+    
+
+    for planta, info in BBDD.items():
+        if info["hábitat"] == habitat:
+            plantas_habitat.append(planta)
+
+    if plantas_habitat:
+        print("Las plantas que se encuentran en el hábitat", habitat, "son:", ', ' .join(plantas_habitat))
+        
+    else:
+        print("No se encontraron plantas en el hábitat", habitat)
+        
+
+buscar_por_habitat()
+
+#def buscar_por_provincia():
+#    provincia = input("Introduce la provincia:", )
+#    for planta, info in BBDD.items():
+#        if info["provincias"] == provincia:
+#            print("En", provincia ,"se pueden cultivar:", planta)
+#        else:
+#            print("Su provincia no se encuentra en la base de datos")
+
+def buscar_por_provincia():
+    provincia = input("Introduce la provincia: ")
+    arboles_encontrados = []
+
+    for planta, info in BBDD.items():
+        if provincia in info["provincias"]:
+            arboles_encontrados.append(planta)
+
+    if arboles_encontrados:
+        print("Los árboles que se encuentran en", provincia,  "son:", ', ' .join(arboles_encontrados))
+    else:
+        print("No se encontraron árboles para la provincia", provincia, ".")
+
+
+#EJERCICIO 3
+# Realice el ejercicio dentro del cuadro a continuación de esta línea 
+
+
+import json
+
+# Nombre del archivo donde se almacenará la BBDD
+ARCHIVO_BBDD = 'BBDD_plantas.txt'
+
+def cargar_BBDD():
+    try:
+        with open(ARCHIVO_BBDD, 'r') as archivo:
+            return json.load(archivo)
+    except FileNotFoundError:
+        print("El archivo de BBDD no existe. Comenzando con una BBDD vacía.")
+        return {}
+
+def guardar_BBDD(BBDD):
+    with open(ARCHIVO_BBDD, 'w') as archivo:
+        json.dump(BBDD, archivo)
+
+# Cargar la BBDD al inicio del programa
+BBDD = cargar_BBDD()
+
+def buscar_por_habitat():
+    habitat = input("Introduce el hábitat: ")
+
+    plantas_en_habitat = []
+
+    for planta, info in BBDD.items():
+        if info["hábitat"] == habitat:
+            plantas_en_habitat.append(planta)
+
+    if plantas_en_habitat:
+        print(f"Las plantas que se encuentran en el hábitat {habitat} son:")
+        for planta in plantas_en_habitat:
+            print(f" - {planta}")
+    else:
+        print(f"No se encontraron plantas en el hábitat {habitat}.")
+
+# Ejecutar la función
+buscar_por_habitat()
+
+# Guardar la BBDD al salir del programa
+guardar_BBDD(BBDD)
